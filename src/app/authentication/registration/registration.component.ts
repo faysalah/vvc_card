@@ -1,36 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from '../authentication.service';
-import { UserRegistration } from '../authenticaton';
+import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 
+export interface PromptModel {
+  title: string;
+}
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
+  styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
-  registrationForm: FormGroup;
-  user = new UserRegistration();
-  constructor(private _fb: FormBuilder,
-    private _authenticationService: AuthenticationService) {
-    this.registrationForm = this._fb.group({
-      'email': ['', Validators.required],
-      'password': ['', Validators.required],
-      'confirmPassword': ['', Validators.required]
-    });
+
+export class RegistrationComponent extends DialogComponent<PromptModel, string> implements PromptModel {
+  title: string;
+  email: string;
+  password: string;
+  cpassword: string;
+  constructor(dialogService: DialogService, ) {
+    super(dialogService);
   }
 
-  ngOnInit() {
+  registration() {
+    console.log(this.email + ' ' + this.password + ' ' + this.cpassword);
+    this.close();
   }
 
-  submitUser() {
-    this._authenticationService.userRegistration(this.registrationForm.value)
-      .subscribe(
-      x => {
-        confirm('Registration Successful');
-        console.log(this.registrationForm.value.email);
-      });
+  // ngOnInit() {
+  //   this.authenticationService.logout();
+  //   this.authenticationService.isAuthenticated.next(false);
+  // }
 
-  }
-
+  // login(form: NgForm) {
+  //   console.log(form);
+  //   this.authenticationService.login(form.value.email, form.value.password)
+  //     .subscribe(
+  //     response => {
+  //       confirm('signin sucessfully');
+  //       this.authenticationService.isAuthenticated.next(true);
+  //       this.router.navigate(['/wallet']);
+  //     },
+  //     error => {
+  //       alert('login failled');
+  //       this.router.navigate(['/home']);
+  //     }
+  //     );
+  // }
 }

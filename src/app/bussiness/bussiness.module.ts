@@ -5,30 +5,33 @@ import { WalletComponent } from './wallet/wallet.component';
 import { CardComponent } from './card/card.component';
 import { CardRequestComponent } from './card-request/card-request.component';
 import { BussinessRouting } from './bussiness.routing';
-import { AccountComponent } from './account/account.component';
+
 import { HomeComponent } from './home/home.component';
 import { ApplycardComponent } from './applycard/applycard.component';
-import { TempCardComponent } from './temp-card/temp-card.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    BussinessRouting
+    BussinessRouting,
+    FormsModule,
+    ReactiveFormsModule,
+    BootstrapModalModule
   ],
   declarations: [
     WalletComponent,
     CardComponent,
     CardRequestComponent,
-    AccountComponent,
     HomeComponent,
     ApplycardComponent,
-    TempCardComponent],
+    InfoComponent],
   exports: [
     WalletComponent,
     CardComponent,
     CardRequestComponent
   ],
-  providers:[BussinessService]
+  providers: [BussinessService]
 })
 export class BussinessModule { }

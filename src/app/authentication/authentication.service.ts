@@ -1,46 +1,39 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from "@angular/http";
-import { UserRegistration } from "./authenticaton";
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class AuthenticationService {
-  private _url = "http://localhost:52338/api/Account/Register";
-  public token: string;
+  isAuthenticated = new Subject();
 
-  constructor(private _http: Http) {
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
-  }
+  constructor(private http: Http) { }
 
-  userRegistration(user: UserRegistration) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this._http.post(this._url, JSON.stringify(user), options);
-  }
-
-  login(username: string, password: string) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    let req = 'username=' + username + '&password=' + password + '&grant_type=password';
-    return this._http.post('http://localhost:52338/token', req, options)
+  login(email: string, passwd: string) {
+    const body = 'username=' + email + '&password=' + passwd + '&grant_type=password';
+    return this.http.post('http://localhost:57188/Token', body)
       .map((response: Response) => {
-        let token = response.json() && response.json().access_token;
-        if (token) {
-          this.token = token;
-          localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
-          return true;
-        } else {
-          return false;
-        }
-      });
+        return response.json();
+      }
+      ).do(
+      response => {
+        localStorage.setItem('token', 'bearer ' + response.access_token);
+        localStorage.setItem('userId', response.userName);
+      }
+      );
+  }
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  getUserId() {
+    return localStorage.getItem('userId');
   }
 
   logout(): void {
-    this.token = null;
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
   }
-
 }

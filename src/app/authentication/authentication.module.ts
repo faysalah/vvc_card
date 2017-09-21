@@ -1,15 +1,17 @@
-import { SharedModule } from './../shared/shared.module';
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AuthenticationRouting } from './authentication.routing';
+
+import { AuthenticationService } from './authentication.service';
+
+
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
-import { AuthenticationService } from "./authentication.service";
-import { HttpModule} from '@angular/http';
 
 
 @NgModule({
@@ -18,18 +20,16 @@ import { HttpModule} from '@angular/http';
     AuthenticationRouting,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
-    SharedModule
+    HttpModule
   ],
   declarations: [
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    ChangePasswordComponent
   ],
   exports: [
-    RegistrationComponent,
-    LoginComponent
   ],
-  providers:[
+  providers: [
     AuthenticationService
   ],
 })

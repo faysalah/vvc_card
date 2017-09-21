@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { ShowAuthedDirective } from './showauth.directive';
-
 
 @NgModule({
   imports: [
@@ -12,12 +10,10 @@ import { ShowAuthedDirective } from './showauth.directive';
     RouterModule
   ],
   declarations: [
-    ShowAuthedDirective,
     NavbarComponent
   ],
-  exports:[
-    NavbarComponent,
-    ShowAuthedDirective
+  exports: [
+    NavbarComponent
   ]
 })
 export class SharedModule { }
