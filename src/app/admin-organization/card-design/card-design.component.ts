@@ -45,6 +45,7 @@ export class CardDesignComponent implements OnInit {
       'Field6placeholder': this.input6ph,
       'Field7': this.input7,
       'Field7placeholder': this.input7ph,
+      'AdminId': localStorage.getItem('orgAdminId')
     };
     console.log(design);
     this.adminOrganizationService.addDesign(design)

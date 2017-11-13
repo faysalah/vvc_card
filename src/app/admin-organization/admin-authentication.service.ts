@@ -8,32 +8,54 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class AdminAuthenticationService {
   isAuthenticated = new Subject();
-
+  private url = 'http://localhost:57188/';
   constructor(private http: Http) { }
 
   login(email: string, passwd: string) {
     const body = 'username=' + email + '&password=' + passwd + '&grant_type=password';
-    return this.http.post('http://localhost:57188/Token', body)
+    return this.http.post(this.url+'Token', body)
       .map((response: Response) => {
         return response.json();
       }
       ).do(
       response => {
-        localStorage.setItem('token', 'bearer ' + response.access_token);
-        localStorage.setItem('adminId', response.userName);
+        localStorage.setItem('orgAdminToken', 'bearer ' + response.access_token);
+        localStorage.setItem('orgAdminId', response.id);
+        localStorage.setItem('orgAdminName', response.name);
       }
       );
   }
-  getToken() {
-    return localStorage.getItem('token');
+
+  changePassword(oldPassword: string, newPassword: string, confirmpassword: string) {
+    const body = JSON.stringify({ oldPassword: oldPassword, newPassword: newPassword, confirmPassword: confirmpassword });
+    const token = this.getOrgAdminToken();
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', token);
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.url+'api/Account/ChangePassword', body, options);
   }
 
-  getUserId() {
-    return localStorage.getItem('adminId');
+  registration(body) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post(this.url+'api/Account/Register', body, { headers: headers });
   }
 
+  getOrgAdminToken() {
+    return localStorage.getItem('orgAdminToken');
+  }
+
+  getOrgAdminUserId() {
+    return localStorage.getItem('orgAdminId');
+  }
+
+  getOrgAdminUserName() {
+    return localStorage.getItem('orgAdminName');
+  }
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('adminId');
+    localStorage.removeItem('orgAdminToken');
+    localStorage.removeItem('orgAdminId');
+    localStorage.removeItem('orgAdminName');
   }
 }

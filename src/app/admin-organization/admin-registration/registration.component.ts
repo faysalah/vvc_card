@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
+import { AdminAuthenticationService } from '../admin-authentication.service';
 
 export interface PromptModel {
   title: string;
@@ -12,36 +14,33 @@ export interface PromptModel {
 
 export class AdminRegistrationComponent extends DialogComponent<PromptModel, string> implements PromptModel {
   title: string;
+  name: string;
   email: string;
   password: string;
   cpassword: string;
-  constructor(dialogService: DialogService, ) {
+  constructor(dialogService: DialogService,
+    private authenticationService: AdminAuthenticationService) {
     super(dialogService);
   }
 
-  registration() {
-    console.log(this.email + ' ' + this.password + ' ' + this.cpassword);
+  registration(value) {
+    console.log(value);
+    const body = {
+      'Name': value.name,
+      'Email': value.email,
+      'Password': value.password,
+      'ConfirmPassword': value.cpassword,
+      'RoleId': '2000'
+    };
+    this.authenticationService.registration(body)
+      .subscribe(
+      Response => {
+        confirm('Registration successful.');
+      },
+      error => {
+        confirm('Registration filed.Try again.');
+      }
+      );
     this.close();
   }
-
-  // ngOnInit() {
-  //   this.authenticationService.logout();
-  //   this.authenticationService.isAuthenticated.next(false);
-  // }
-
-  // login(form: NgForm) {
-  //   console.log(form);
-  //   this.authenticationService.login(form.value.email, form.value.password)
-  //     .subscribe(
-  //     response => {
-  //       confirm('signin sucessfully');
-  //       this.authenticationService.isAuthenticated.next(true);
-  //       this.router.navigate(['/wallet']);
-  //     },
-  //     error => {
-  //       alert('login failled');
-  //       this.router.navigate(['/home']);
-  //     }
-  //     );
-  // }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { } from '../temp-card/';
+import { BussinessService } from '../bussiness.service';
 
 @Component({
   selector: 'app-card',
@@ -7,10 +7,11 @@ import { } from '../temp-card/';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-
-  constructor() { }
+  card: any = {};
+  constructor(private bussinessService: BussinessService) { }
 
   ngOnInit() {
+    this.bussinessService.getCardByUser()
+      .subscribe(res => this.card = res);
   }
-
 }

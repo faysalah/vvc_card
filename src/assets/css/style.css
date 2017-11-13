@@ -1,12 +1,24 @@
 body {
   background: #67768B;
 }
+#new-request-body{
+  margin-top:50px;
+}
 
+#users-body{
+  margin-top:50px; 
+}
 #card-request tr:hover {
-  background: #6FA2E0;
-  color: #000;
-  font-size: 1.2em;
-  align-self: auto;
+  background: rgb(44, 62, 80);
+  color:white;
+}
+#card-request table {
+  align-content: center;
+  color:black;
+}
+#card-request h3 {
+  text-align: center;
+  color:black;
 }
 
 #navbar123 {
@@ -101,5 +113,13 @@ body {
 }
 
 #apply-card{
+  margin-top: 100px;
+}
+
+#find-card-section{
+  margin-top: 100px;
+}
+
+#admin-body{
   margin-top: 100px;
 }

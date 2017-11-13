@@ -1,24 +1,27 @@
-import { BussinessService } from './bussiness.service';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { WalletComponent } from './wallet/wallet.component';
 import { CardComponent } from './card/card.component';
 import { CardRequestComponent } from './card-request/card-request.component';
-import { BussinessRouting } from './bussiness.routing';
+import { BUSSINESS_ROUTES } from './bussiness.routing';
 
+import { NavbarComponent } from './navbar/navbar.component';
+import { BussinessService } from './bussiness.service';
 import { HomeComponent } from './home/home.component';
 import { ApplycardComponent } from './applycard/applycard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import { InfoComponent } from './info/info.component';
+import { BusinessComponent } from './bussiness.component';
+import { FindCardComponent } from './find-card/find-card.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    BussinessRouting,
     FormsModule,
     ReactiveFormsModule,
-    BootstrapModalModule
+    BootstrapModalModule,
+    RouterModule
   ],
   declarations: [
     WalletComponent,
@@ -26,11 +29,14 @@ import { InfoComponent } from './info/info.component';
     CardRequestComponent,
     HomeComponent,
     ApplycardComponent,
-    InfoComponent],
+    FindCardComponent,
+    BusinessComponent,
+    NavbarComponent],
   exports: [
     WalletComponent,
     CardComponent,
-    CardRequestComponent
+    CardRequestComponent,
+    HomeComponent
   ],
   providers: [BussinessService]
 })

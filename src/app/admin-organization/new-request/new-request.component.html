@@ -48,7 +48,27 @@
                 </div>
             </div>
         </header>
-       
+
+        <!-- BODY -->
+        <section id="new-request-body">
+          <div class="container">
+          <table class="table table-hover">
+            <tr *ngFor="let card of newcards" class="active">
+              <td>{{ card.Field1}}</td>
+              <td>{{ card.Field2}}</td>
+              <td>{{ card.Field3}}</td>
+              <td>{{ card.Field4}}</td>
+              <td>{{ card.Field5}}</td>
+              <td>{{ card.Field6}}</td>
+              <td>{{ card.Field7}}</td>
+              <td>
+                <button class="btn btn-success btn-sm" (click)="onAccept(card)"> Accept </button>
+                <button class="btn btn-danger btn-sm"  (click)="onDecline(card)"> Decline </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        </section>
        <!-- admin FOOTER -->
         <footer id="admin-footer" class="navbar-inverse text-white footer navbar-fixed-bottom">
             <div class="container">

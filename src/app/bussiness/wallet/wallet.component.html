@@ -1,75 +1,23 @@
 <section id="wallet-section">
 
   <div class="container">
-
     <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="well">
-          <div>
-            <img src="../../assets/logo.jpg" height="70px" width="70px"> &nbsp; &nbsp;
-          </div>
-          <div>
-            Majahar Islam <br> 
-            01675996843 <br>
-            Majharul700@diu.edu.bd<br> 
-            Danmondi,dhaka
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="well">
-          <div>
-            <img src="../../assets/logo.jpg" height="70px" width="70px"> &nbsp; &nbsp;
-          </div>
-          <div>
-            Majahar Islam <br> 
-            01675996843 <br>
-            Majharul700@diu.edu.bd<br> 
-            Danmondi,dhaka
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="well">
-          <div>
-            <img src="../../assets/logo.jpg" height="70px" width="70px"> &nbsp; &nbsp;
-          </div>
-          <div>
-            Majahar Islam <br> 
-            01675996843 <br>
-            Majharul700@diu.edu.bd<br> 
-            Danmondi,dhaka
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="well">
-          <div>
-            <img src="../../assets/logo.jpg" height="70px" width="70px"> &nbsp; &nbsp;
-          </div>
-          <div>
-            Majahar Islam <br> 
-            01675996843 <br>
-            Majharul700@diu.edu.bd<br> 
-            Danmondi,dhaka
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="well">
-          <div>
-            <img src="../../assets/logo.jpg" height="70px" width="70px"> &nbsp; &nbsp;
-          </div>
-          <div>
-            Majahar Islam <br> 
-            01675996843 <br>
-            Majharul700@diu.edu.bd<br> 
-            Danmondi,dhaka
-          </div>
-        </div>
-      </div>
-    </div>
 
+      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let wallet of wallets">
+        <div class="well">
+          <div>
+            {{wallet.Field1}} <br> {{wallet.Field2}} <br>
+            <span *ngIf="wallet.Field3 != null">{{wallet.Field3}}<br></span>
+            <span *ngIf="wallet.Field4 != null">{{wallet.Field4}}<br></span>
+            <span *ngIf="wallet.Field4 != null">{{wallet.Field5}}<br></span>
+            <div *ngIf="wallet.Field6 != null">{{wallet.Field6}}<br></div>
+            <div [hidden]="wallet.Field7 == null">{{wallet.Field7}}<br></div>
+            <span>{{wallet.Name}}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 

@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NavbarComponent } from './navbar/navbar.component';
+
+import { ErrorComponent } from './error/error.component';
+import { ErrorService } from './error/error.service';
 
 @NgModule({
   imports: [
@@ -10,10 +12,11 @@ import { NavbarComponent } from './navbar/navbar.component';
     RouterModule
   ],
   declarations: [
-    NavbarComponent
+    ErrorComponent
   ],
   exports: [
-    NavbarComponent
-  ]
+    ErrorComponent
+  ],
+  providers: [ErrorService]
 })
 export class SharedModule { }

@@ -1,17 +1,20 @@
-import { ApplycardComponent } from './applycard/applycard.component';
-import { HomeComponent } from './home/home.component';
-import { CardComponent } from './card/card.component';
-import { CardRequestComponent } from './card-request/card-request.component';
+import { ChangePasswordComponent } from './../authentication/change-password/change-password.component';
+import { BusinessComponent } from './bussiness.component';
+import { Routes } from '@angular/router';
+
 import { WalletComponent } from './wallet/wallet.component';
-import { InfoComponent } from './info/info.component';
-import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { CardRequestComponent } from './card-request/card-request.component';
+import { CardComponent } from './card/card.component';
+import { ApplycardComponent } from './applycard/applycard.component';
+import { FindCardComponent } from './find-card/find-card.component';
 
-
-export const BussinessRouting = RouterModule.forChild([
+export const BUSSINESS_ROUTES: Routes = [
+    { path: '', redirectTo: 'wallet', pathMatch: 'full' },
     { path: 'wallet', component: WalletComponent },
-    { path: 'home', component: HomeComponent },
+    { path: 'changePassword', component: ChangePasswordComponent },
     { path: 'card-request', component: CardRequestComponent },
     { path: 'card', component: CardComponent },
     { path: 'apply-card', component: ApplycardComponent },
-    { path: 'info', component: InfoComponent }
-]);
+    { path: 'find-card/:name', component: FindCardComponent }
+];

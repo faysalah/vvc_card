@@ -15,31 +15,32 @@
                         </option> 
                 </select>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" [hidden]="selectedOrg?.Field1 == null">
               <label>{{ selectedOrg?.Field1 }}</label>
               <input type="text" class="form-control" [(ngModel)]="Field1" [placeholder]="selectedOrg?.Field1Placeholder">
             </div>
-            <div class="form-group">
+            <div class="form-group"  [hidden]="selectedOrg?.Field2 == null">
               <label>{{ selectedOrg?.Field2 }}</label>
               <input type="text" class="form-control" [(ngModel)]="Field2" [placeholder]="selectedOrg?.Field2Placeholder">
             </div>
-            <div class="form-group">
+            <div class="form-group" [hidden]="selectedOrg?.Field3 == null">
               <label>{{ selectedOrg?.Field3 }}</label>
               <input type="text" class="form-control" [(ngModel)]="Field3" [placeholder]="selectedOrg?.Field3Placeholder">
             </div>
-            <div class="form-group">
+            <div class="form-group" [hidden]="selectedOrg?.Field4 == null">
               <label>{{ selectedOrg?.Field4 }}</label>
               <input type="text" class="form-control" [(ngModel)]="Field4" [placeholder]="selectedOrg?.Field4Placeholder">
             </div>
-            <div class="form-group">
+            <div class="form-group" [hidden]="selectedOrg?.Field5 == null">
               <label>{{ selectedOrg?.Field5 }}</label>
               <input type="text" class="form-control" [(ngModel)]="Field5" [placeholder]="selectedOrg?.Field5Placeholder">
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngIf="selectedOrg?.Field6 != null">
               <label>{{ selectedOrg?.Field6 }}</label>
               <input type="text" class="form-control" [(ngModel)]="Field6" [placeholder]="selectedOrg?.Field6Placeholder">
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngIf="selectedOrg?.Field7 != null">
               <label>{{ selectedOrg?.Field7 }}</label>
               <input type="text" class="form-control" [(ngModel)]="Field7" [placeholder]="selectedOrg?.Field7Placeholder">
             </div>

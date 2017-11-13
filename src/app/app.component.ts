@@ -4,10 +4,11 @@ import { LoginComponent } from './authentication/login/login.component';
 
 @Component({
   selector: 'app-root',
-  template: `<app-navbar>
-            </app-navbar>
-            <router-outlet>
-            </router-outlet>`,
-  styles: []
+  template: ` 
+  <router-outlet></router-outlet>
+  <app-error> </app-error>
+            `
 })
-export class AppComponent { }
+export class AppComponent { 
+ 
+}

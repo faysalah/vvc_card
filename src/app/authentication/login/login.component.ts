@@ -3,6 +3,7 @@ import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 
+
 export interface PromptModel {
   title: string;
 }
@@ -12,7 +13,7 @@ export interface PromptModel {
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent extends DialogComponent<PromptModel, string> implements PromptModel {
+export class LoginComponent extends DialogComponent<PromptModel, string> implements PromptModel, OnInit {
   title: string;
   email: string;
   password: string;
@@ -22,22 +23,22 @@ export class LoginComponent extends DialogComponent<PromptModel, string> impleme
     super(dialogService);
   }
 
-  login() {
-    this.authenticationService.login(this.email, this.password)
-    .subscribe(
-    response => {
-      confirm('signin sucessfully');
-      this.authenticationService.isAuthenticated.next(true);
-      this.router.navigate(['/wallet']);
-    },
-    error => {
-      alert('login failled');
-      this.router.navigate(['/home']);
-    }
-    );
-    this.close();
+  ngOnInit() {
+    this.authenticationService.logout();
   }
 
+  login(value) {
+    this.authenticationService.login(value.email, value.password)
+      .subscribe(
+      response => {
+        localStorage.setItem('token', 'bearer ' + response.access_token);
+        localStorage.setItem('userId', response.id);
+        localStorage.setItem('userName', response.name);
+        this.router.navigate(['/bussiness/wallet']);
+      });
+    this.close();
+  }
+ 
   // ngOnInit() {
   //   this.authenticationService.logout();
   //   this.authenticationService.isAuthenticated.next(false);
