@@ -7,7 +7,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BussinessService {
-    private url = 'http://localhost:57188/';
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
     getOrganization() {
         const token = this.authenticationService.getToken();
@@ -15,7 +14,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.url + 'api/Organizations', options)
+        return this.http.get('api/Organizations', options)
             .map((result: Response) => result.json());
     }
 
@@ -25,7 +24,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.url + 'api/Cards/' + this.authenticationService.getUserId(), options)
+        return this.http.get('api/Cards/' + this.authenticationService.getUserId(), options)
             .map((result: Response) => result.json());
     }
 
@@ -35,7 +34,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.url + 'api/SearchCards/' + Name, options)
+        return this.http.get('api/SearchCards/' + Name, options)
             .map((result: Response) => result.json());
     }
 
@@ -45,7 +44,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.url + 'api/CardRequests/' + this.authenticationService.getUserId(), options)
+        return this.http.get('api/CardRequests/' + this.authenticationService.getUserId(), options)
             .map((result: Response) => result.json());
     }
 
@@ -55,7 +54,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.post(this.url + 'api/Cards', body, options)
+        return this.http.post('api/Cards', body, options)
             .map((response: Response) => {
                 return response.json();
             });
@@ -66,7 +65,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.post(this.url + 'api/CardRequests', body, options);
+        return this.http.post('api/CardRequests', body, options);
     }
 
     addWallet(body) {
@@ -75,7 +74,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.post(this.url + 'api/Wallets', body, options)
+        return this.http.post('api/Wallets', body, options)
             .map((response: Response) => {
                 return response.json();
             });
@@ -87,7 +86,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.put(this.url + 'api/CardRequests/update/' + id, body, options);
+        return this.http.put('api/CardRequests/update/' + id, body, options);
     }
 
     declineRequest(id) {
@@ -96,7 +95,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.delete(this.url + 'api/CardRequests/delete/' + id, options)
+        return this.http.delete('api/CardRequests/delete/' + id, options)
             .map((response: Response) => {
                 return response.json();
             });
@@ -108,7 +107,7 @@ export class BussinessService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.url + 'api/wallets/' + this.authenticationService.getUserId(), options)
+        return this.http.get('api/wallets/' + this.authenticationService.getUserId(), options)
             .map((result: Response) => result.json());
     }
 

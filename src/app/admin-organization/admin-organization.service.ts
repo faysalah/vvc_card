@@ -8,7 +8,6 @@ import 'rxjs/add/operator/do';
 
 @Injectable()
 export class AdminOrganizationService {
-    private url = 'http://localhost:57188/';
     constructor(private http: Http,
         private adminAuthenticationService: AdminAuthenticationService) { }
 
@@ -18,7 +17,7 @@ export class AdminOrganizationService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.post(this.url+'api/Organizations', body, options)
+        return this.http.post('api/Organizations', body, options)
             .map((response: Response) => {
                 return response.json();
             });
@@ -30,7 +29,7 @@ export class AdminOrganizationService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.url+'api/Orgadmin/Cardrequest/'
+        return this.http.get('api/Orgadmin/Cardrequest/'
             + this.adminAuthenticationService.getOrgAdminUserId(), options)
             .map((response: Response) => {
                 return response.json();
@@ -44,7 +43,7 @@ export class AdminOrganizationService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.url+'api/Orgadmin/Card/' +
+        return this.http.get('api/Orgadmin/Card/' +
             this.adminAuthenticationService.getOrgAdminUserId(), options)
             .map((response: Response) => {
                 return response.json();
@@ -57,7 +56,7 @@ export class AdminOrganizationService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.put(this.url+'api/Orgadmin/Card/Update/' + id, body);
+        return this.http.put(+'api/Orgadmin/Card/Update/' + id, body);
     }
 
     declineRequest(id) {
@@ -66,6 +65,6 @@ export class AdminOrganizationService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', token);
         const options = new RequestOptions({ headers: headers });
-        return this.http.delete(this.url+'api/Orgadmin/Card/Delete/' + id);
+        return this.http.delete('api/Orgadmin/Card/Delete/' + id);
     }
 }

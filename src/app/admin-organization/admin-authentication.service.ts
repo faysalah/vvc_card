@@ -8,12 +8,12 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class AdminAuthenticationService {
   isAuthenticated = new Subject();
-  private url = 'http://localhost:57188/';
+
   constructor(private http: Http) { }
 
   login(email: string, passwd: string) {
     const body = 'username=' + email + '&password=' + passwd + '&grant_type=password';
-    return this.http.post(this.url+'Token', body)
+    return this.http.post('Token', body)
       .map((response: Response) => {
         return response.json();
       }
@@ -34,12 +34,12 @@ export class AdminAuthenticationService {
     headers.append('Authorization', token);
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.url+'api/Account/ChangePassword', body, options);
+    return this.http.post('api/Account/ChangePassword', body, options);
   }
 
   registration(body) {
     const headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.post(this.url+'api/Account/Register', body, { headers: headers });
+    return this.http.post('api/Account/Register', body, { headers: headers });
   }
 
   getOrgAdminToken() {

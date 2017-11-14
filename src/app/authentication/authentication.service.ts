@@ -9,13 +9,12 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class AuthenticationService {
-  private url = 'http://localhost:57188/';
 
   constructor(private http: Http, private errorService: ErrorService) { }
 
   login(email: string, passwd: string) {
     const body = 'username=' + email + '&password=' + passwd + '&grant_type=password';
-    return this.http.post(this.url + 'Token', body)
+    return this.http.post('Token', body)
       .map((response: Response) => {
         this.errorService.handleError({ 'error': 'login success', 'error_description': 'User login successfully' });
         return response.json();
@@ -34,12 +33,12 @@ export class AuthenticationService {
     headers.append('Authorization', token);
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.url + 'api/Account/ChangePassword', body, options);
+    return this.http.post('api/Account/ChangePassword', body, options);
   }
 
   registration(body) {
     const headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.post(this.url + 'api/Account/Register', body, { headers: headers })
+    return this.http.post('api/Account/Register', body, { headers: headers })
       .map((response: Response) => {
         this.errorService.handleError({ 'error': 'Registration success', 'error_description': 'You can login now.' });
         return response.json();
